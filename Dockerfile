@@ -25,7 +25,7 @@ WORKDIR /home/node/app/ripley-frontend
 
 RUN npm install
 
-RUN ng build
+RUN ng build --prod
  
 
 WORKDIR /home/node/app/ripley-backend
