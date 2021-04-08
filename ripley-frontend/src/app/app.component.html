@@ -1,4 +1,5 @@
 <mat-toolbar fxLayout="row" color="primary">
+    <img src="assets/logo-app-banco.png" class="logo"/>
   <span fxFlex>Mi Banco - Transferencias</span>
   <button mat-button  *ngFor="let item of menuItems" fxHide.xs (click)="navigateMenu(item.link)" >
       <mat-icon class="mr">{{item.icon}}</mat-icon>

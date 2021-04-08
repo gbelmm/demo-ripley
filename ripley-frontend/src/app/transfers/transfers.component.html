@@ -1,4 +1,7 @@
 <h1>Historial</h1>
+<br /><br />
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<br>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -39,3 +42,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
+
