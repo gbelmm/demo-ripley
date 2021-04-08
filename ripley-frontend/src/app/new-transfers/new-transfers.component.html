@@ -1,0 +1,104 @@
+<h1>Transferir</h1>
+<mat-card mat-elevation-z12>
+    <div class="example-container">
+
+
+        <mat-form-field appearance="fill" matTooltip="Ingrese nombre del Destinatario" matTooltipPosition="above">
+            <mat-label>Buscar Destinatario</mat-label>
+            <input type="text" placeholder="Seleccione uno" aria-label="Number" matInput  [(ngModel)]="recipientid" 
+                [matAutocomplete]="auto" [formControl]="myControl">
+            <mat-autocomplete #auto="matAutocomplete"   >
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option._id" >
+                    {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div *ngIf="createNew===true">
+        <h3>No existe ningun distinatario</h3>
+        <button routerLink="/new-recipient" routerLinkActive="active" mat-raised-button color="primary">Click aquí para crear el primer distinatario</button>
+        <br>
+    </div>
+    <div mat-subheader>Detalle Destinatario</div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese Rut formato 11111111-1" matTooltipPosition="above">
+            <mat-label>Rut</mat-label>
+            <input matInput #input placeholder="Ingrese Rut" [disabled]="true" [(ngModel)]="recipiensSelected.rut"
+                [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start" *ngIf="rutValido == false">Rut Invalido</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Ingrese nombre del Destinatario" matTooltipPosition="above">
+            <mat-label>Nombre</mat-label>
+            <input matInput #input placeholder="Ingrese Nombre" [disabled]="true" [(ngModel)]="recipiensSelected.name"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese un correo de contacto" matTooltipPosition="above">
+            <mat-label>Correo</mat-label>
+            <input type="email" matInput #input placeholder="Ingrese Email" [disabled]="true"  [(ngModel)]="recipiensSelected.email"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Ingrese telefono de contacto" matTooltipPosition="above">
+            <mat-label>Telefono</mat-label>
+            <input matInput #input placeholder="Ingrese Telefono" [disabled]="true"  [(ngModel)]="recipiensSelected.phone"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Seleccione un Banco" matTooltipPosition="above">
+            <mat-label>Banco</mat-label>
+            <mat-select placeholder="Seleccione Banco" [disabled]="true"  [(ngModel)]="recipiensSelected.bank"
+            [ngModelOptions]="{ standalone: true }">
+                <mat-option *ngFor="let food of banks" [value]="food.id">
+                    {{ food.name }}
+                </mat-option>
+            </mat-select>
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Seleccione el tipo de cuenta" matTooltipPosition="above">
+            <mat-label>Tipo Cuenta</mat-label>
+            <mat-select placeholder="Seleccione Tipo Cuenta" [disabled]="true" [(ngModel)]="recipiensSelected.type"
+            [ngModelOptions]="{ standalone: true }">
+                <mat-option *ngFor="let food of types" [value]="food.name">
+                    {{ food.name }}
+                </mat-option>
+            </mat-select>
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese el número de la cuenta de banco"
+            matTooltipPosition="above">
+            <mat-label>Nº De cuenta</mat-label>
+            <input matInput #input placeholder="Ingrese Número Cuenta" [disabled]="true"  [(ngModel)]="recipiensSelected.number"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    
+    <br /><br />
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese un correo de contacto" matTooltipPosition="above">
+            <mat-label>Monto</mat-label>
+            <input type="number" matInput #input placeholder="Ingrese monto a transferir"    [(ngModel)]="recipiensSelected.amount"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <br><br>
+    <div class="opt1">
+        <button mat-raised-button color="primary" [disabled]="loading===true" (click)="save()"  matTooltip="Transferir el monto al Destinatario"
+            matTooltipPosition="above">
+            Transferir
+        </button>
+    </div>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</mat-card>

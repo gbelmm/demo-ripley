@@ -1,0 +1,73 @@
+<h1>Nuevo Destinatario</h1>
+<mat-card mat-elevation-z12>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese Rut formato 11111111-1" matTooltipPosition="above">
+            <mat-label>Rut</mat-label>
+            <input matInput #input placeholder="Ingrese Rut" (keyup)="checkRut()" [(ngModel)]="recipient.rut"
+                [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start" *ngIf="rutValido == false">Rut Invalido</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Ingrese nombre del Destinatario" matTooltipPosition="above">
+            <mat-label>Nombre</mat-label>
+            <input matInput #input placeholder="Ingrese Nombre" [(ngModel)]="recipient.name"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese un correo de contacto" matTooltipPosition="above">
+            <mat-label>Correo</mat-label>
+            <input type="email" matInput #input placeholder="Ingrese Email" [(ngModel)]="recipient.email"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Ingrese telefono de contacto" matTooltipPosition="above">
+            <mat-label>Telefono</mat-label>
+            <input matInput #input placeholder="Ingrese Telefono" [(ngModel)]="recipient.phone"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Seleccione un Banco" matTooltipPosition="above">
+            <mat-label>Banco</mat-label>
+            <mat-select placeholder="Seleccione Banco" [(ngModel)]="recipient.bank"
+            [ngModelOptions]="{ standalone: true }">
+                <mat-option *ngFor="let food of banks" [value]="food.id">
+                    {{ food.name }}
+                </mat-option>
+            </mat-select>
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" matTooltip="Seleccione el tipo de cuenta" matTooltipPosition="above">
+            <mat-label>Tipo Cuenta</mat-label>
+            <mat-select placeholder="Seleccione Tipo Cuenta" [(ngModel)]="recipient.type"
+            [ngModelOptions]="{ standalone: true }">
+                <mat-option *ngFor="let food of types" [value]="food.name">
+                    {{ food.name }}
+                </mat-option>
+            </mat-select>
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="fill" matTooltip="Ingrese el número de la cuenta de banco"
+            matTooltipPosition="above">
+            <mat-label>Nº De cuenta</mat-label>
+            <input matInput #input placeholder="Ingrese Número Cuenta" [(ngModel)]="recipient.number"
+            [ngModelOptions]="{ standalone: true }" />
+            <mat-hint align="start"></mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="opt1">
+        <button mat-raised-button color="primary" [disabled]="loading===true" (click)="save()" matTooltip="Crear Destinatario"
+            matTooltipPosition="above">
+            Crear
+        </button>
+    </div>
+    <br /><br />
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</mat-card>
