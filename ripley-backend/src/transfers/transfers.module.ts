@@ -9,14 +9,14 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
 @Module({
   imports: [
     MailgunModule.forRoot({
-      DOMAIN: 'xxx.cl',
-      API_KEY: 'key-985da84deee378fcdx' 
+      DOMAIN: 'cloudplatform.cl',
+      API_KEY: 'key-985da84deee378fcd7a3884fb2693115',
     }),
     MongooseModule.forFeature([
       { name: Transfers.name, schema: TransfersSchema },
     ]),
   ],
   providers: [TransfersService],
-  controllers: [TransfersController]
+  controllers: [TransfersController],
 })
 export class TransfersModule {}

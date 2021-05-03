@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { BanksService } from '../api/banks.service';
 import * as Rut from 'rutjs';
 import { RecipientService } from '../api/recipient.service';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-new-recipient',
   templateUrl: './new-recipient.component.html',
@@ -18,7 +20,7 @@ export class NewRecipientComponent implements OnInit {
   types: any = [{ name: 'Cuenta Corriente' }, { name: 'Cuenta Vista' }, { name: 'Chequera Electrónica' }, { name: 'Cuenta Ahorro' }]
   recipient: any = { rut: '', name: '', email: '', phone: '', type: '', number: '' };
   rutValido: boolean = false
-  constructor(private _snackBar: MatSnackBar,private banksService: BanksService,private recipientService:RecipientService) { }
+  constructor(private http:HttpClient,private _snackBar: MatSnackBar,private banksService: BanksService,private recipientService:RecipientService) { }
 
   clear(){
     this.recipient={ rut: '', name: '', email: '', phone: '', type: '', number: '' };
@@ -30,6 +32,14 @@ export class NewRecipientComponent implements OnInit {
     this.banks = banks.banks;
    
   }
+  async loadRut(){
+   let rutdata:any = await this.http.get('https://gateway.soapbomberos.cl/gateway/Persona/v1/persona/'+this.recipient.rut+'/').toPromise()
+   console.log('rutdata',rutdata)
+   if (rutdata.statusCode==200){
+    this.recipient.name = rutdata.nombre+' '+rutdata.apellidoPaterno+' '+rutdata.apellidoMaterno;
+    this.recipient.email = rutdata.email;
+   }
+  }
   checkRut() {
     if (this.recipient.rut != '') {
       let rut = new Rut(this.recipient.rut);
@@ -40,7 +50,7 @@ export class NewRecipientComponent implements OnInit {
       if (this.recipient.rut.length > 8) {
         this.rutValido = rut.isValid
         if (rut.isValid === true) {
-
+            this.loadRut();
         }
       } else {
         this.rutValido = false;

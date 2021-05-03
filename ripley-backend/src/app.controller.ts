@@ -1,12 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import {    HttpService } from '@nestjs/common';
-import { AxiosResponse } from 'axios'
-import { Observable } from 'rxjs'
+import { Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
  
+
 @Controller()
 export class AppController {
-  constructor(private readonly http: HttpService,private readonly appService: AppService) {}
+  constructor( ) {}
 
-   
+ 
 }

@@ -4,7 +4,6 @@ import { RecipientController } from './recipient.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RecipientSchema, Recipient } from './schemas/recipient.schema';
 
-
 @Module({
   imports: [
     MongooseModule.forFeature([

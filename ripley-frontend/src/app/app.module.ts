@@ -33,15 +33,24 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component'; 
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { ListRecipientComponent } from './list-recipient/list-recipient.component';
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+ErrorInterceptor
 @NgModule({
   declarations: [
     AppComponent,
     NewRecipientComponent,
     NewTransfersComponent,
     TransfersComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent,
+    LoginComponent,
+    ListRecipientComponent
   ],
   imports: [
     MatAutocompleteModule,
@@ -75,7 +84,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+   // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

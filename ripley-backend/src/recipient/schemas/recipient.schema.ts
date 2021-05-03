@@ -10,19 +10,19 @@ export class Recipient extends Document {
   name: string;
 
   @Prop()
-  email: string;  
+  email: string;
 
   @Prop()
-  phone: string;  
+  phone: string;
 
   @Prop()
   bank: string;
 
   @Prop()
-  type: string;  
+  type: string;
 
   @Prop()
-  number: string;  
+  number: string;
 }
 
 export const RecipientSchema = SchemaFactory.createForClass(Recipient);

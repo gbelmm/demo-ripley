@@ -8,26 +8,19 @@ import { Recipient } from './schemas/recipient.schema';
 
 @Injectable()
 export class RecipientService {
-    constructor(
-        @InjectModel(Recipient.name) private readonly recipientModel: Model<Recipient>,
-      ) {}
+  constructor(
+    @InjectModel(Recipient.name)
+    private readonly recipientModel: Model<Recipient>,
+  ) {}
 
-      public async findAll(
-         
-      ): Promise<Recipient[]> {
-       
-    
-        return await this.recipientModel
-          .find()
-          .exec();
-      }
+  public async findAll(): Promise<Recipient[]> {
+    return await this.recipientModel.find().exec();
+  }
 
-      public async create(
-        createRecipientDto: CreateRecipientDto,
-      ): Promise<IRecipient> {
-        const newCustomer = await new this.recipientModel(createRecipientDto);
-        return newCustomer.save();
-      }
-
-     
+  public async create(
+    createRecipientDto: CreateRecipientDto,
+  ): Promise<IRecipient> {
+    const newCustomer = await new this.recipientModel(createRecipientDto);
+    return newCustomer.save();
+  }
 }

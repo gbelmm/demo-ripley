@@ -7,10 +7,10 @@ export class Transfers extends Document {
   date: Date;
 
   @Prop()
-  amount: Number;
+  amount: number;
 
   @Prop({ type: Types.ObjectId, ref: 'Recipient' })
-  recipient: string 
+  recipient: string;
 }
 
 export const TransfersSchema = SchemaFactory.createForClass(Transfers);
